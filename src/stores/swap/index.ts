@@ -63,30 +63,32 @@ export const useSwapStore = defineStore('swapStore', () => {
   }
 
   const getAmountToken2Quantity = () => {
-    setInterval(async () => {
-      if (token2.value.address && token1.value.quantity && !isReversingTokens.value) {
-        priceInUpdate.value = true
-        token2.value.quantity = await api
-          .get('get_qoute', {
-            params: {
-              chain: mainStore.chain?.id,
-              tokenTo: token2.value.address,
-              tokenFrom: token1.value.address,
-              amount: +token1.value.quantity * 10 ** token1.value.decimals
-            }
-          })
-          .then((res: AxiosResponse) => {
-            const amountOut = res.data.toAmount / 10 ** token2.value.decimals || token2.value.quantity
-            token2Price.value = isReversedTokens.value
-              ? amountOut / token1.value.quantity
-              : token1.value.quantity / amountOut
-            return amountOut
-          })
-          .finally(() => {
-            priceInUpdate.value = false
-          })
-      }
-    }, 4000)
+    setInterval(fetchAmountToken2Quantity, 4000)
+  }
+
+  const fetchAmountToken2Quantity = async () => {
+    if (token2.value.address && token1.value.quantity && !isReversingTokens.value) {
+      priceInUpdate.value = true
+      token2.value.quantity = await api
+        .get('get_qoute', {
+          params: {
+            chain: mainStore.chain?.id,
+            tokenTo: token2.value.address,
+            tokenFrom: token1.value.address,
+            amount: +token1.value.quantity * 10 ** token1.value.decimals
+          }
+        })
+        .then((res: AxiosResponse) => {
+          const amountOut = res.data.toAmount / 10 ** token2.value.decimals || token2.value.quantity
+          token2Price.value = isReversedTokens.value
+            ? amountOut / token1.value.quantity
+            : token1.value.quantity / amountOut
+          return amountOut
+        })
+        .finally(() => {
+          priceInUpdate.value = false
+        })
+    }
   }
 
   const init = async () => {
@@ -181,6 +183,7 @@ export const useSwapStore = defineStore('swapStore', () => {
     isReversedTokens,
 
     init,
-    getTokenInfo
+    getTokenInfo,
+    fetchAmountToken2Quantity
   }
 })

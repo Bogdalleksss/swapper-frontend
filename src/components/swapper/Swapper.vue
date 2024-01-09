@@ -6,6 +6,15 @@
         <template v-slot:head>
           <div :class="$style.control">
             <ChipButton
+              @click="reload"
+            >
+              <template v-slot:append>
+                <img
+                  src="~/assets/img/reload.svg"
+                />
+              </template>
+            </ChipButton>
+            <ChipButton
               :title="`${swapStore.slippage}%`"
               @click="store.setPopup('slippage')"
             >
@@ -130,6 +139,10 @@ const getFormattedValue = (value: number, digits = 15) => {
   return new Intl.NumberFormat('ru', {
     maximumFractionDigits: digits
   }).format(value)
+}
+
+const reload = () => {
+  swapStore.fetchAmountToken2Quantity()
 }
 
 const setMaxToSwap = () => {

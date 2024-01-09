@@ -1,7 +1,7 @@
 <template>
   <button :class="[$style.button, $style[type]]">
     <slot name="append"/>
-    <span>
+    <span v-if="title">
       {{ title }}
     </span>
   </button>

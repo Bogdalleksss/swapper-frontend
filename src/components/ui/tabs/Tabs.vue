@@ -34,6 +34,30 @@ const tabs = ref([
     chainId: 56,
     color: "#C4854B"
   },
+  {
+    id: 3,
+    name: "Polygon",
+    chainId: 137,
+    color: "#854bc4"
+  },
+  {
+    id: 4,
+    name: "Optimism",
+    chainId: 10,
+    color: "#c44b4b"
+  },
+  {
+    id: 5,
+    name: "Arbitrum",
+    chainId: 42161,
+    color: "#009ff5"
+  },
+  {
+    id: 6,
+    name: "Base",
+    chainId: 8453,
+    color: "#0060dc"
+  },
 ])
 const selectedTabs: Ref<number[]> = ref([])
 

@@ -18,7 +18,31 @@ export const useMainStore = defineStore('mainStore', () => {
       name: 'BSC',
       native_token_symbol: 'BNB',
       transaction_url: 'https://bscscan.com/tx'
-    }
+    },
+    {
+      id: 42161,
+      name: 'Arbitrum',
+      native_token_symbol: 'ARB',
+      transaction_url: 'https://arbiscan.io/tx'
+    },
+    {
+      id: 10,
+      name: 'Optimism',
+      native_token_symbol: 'OP',
+      transaction_url: 'https://optimistic.etherscan.io/tx'
+    },
+    {
+      id: 137,
+      name: 'Polygon',
+      native_token_symbol: 'MATIC',
+      transaction_url: 'https://polygonscan.com/tx'
+    },
+    {
+      id: 8453,
+      name: 'Base',
+      native_token_symbol: 'ETCH',
+      transaction_url: 'https://basescan.org/tx'
+    },
   ])
   const inch: Ref<Inch | null> = ref(null)
   const rpc: Ref<string> = ref("")
